@@ -1,3 +1,9 @@
+// GitHub configuration
+const GITHUB_TOKEN = ''; // You'll need to set this
+const REPO_OWNER = 'iamyohannes6';
+const REPO_NAME = 'portfolio';
+const BRANCH = 'main';
+
 // DOM Elements
 const heroForm = document.getElementById('hero-form');
 const aboutForm = document.getElementById('about-form');
@@ -18,10 +24,11 @@ let siteData = {
     }
 };
 
-// Load data from JSON file
+// Load data from GitHub
 async function loadData() {
     try {
-        const response = await fetch('/data.json');
+        const response = await fetch('https://raw.githubusercontent.com/' + 
+            `${REPO_OWNER}/${REPO_NAME}/${BRANCH}/data.json`);
         if (!response.ok) throw new Error('Failed to load data');
         siteData = await response.json();
         updateFormFields();
@@ -32,15 +39,32 @@ async function loadData() {
     }
 }
 
-// Save data to JSON file
+// Save data to GitHub
 async function saveData() {
     try {
-        const response = await fetch('/admin/save', {
-            method: 'POST',
+        // First, get the current file's SHA
+        const currentFile = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/data.json`, {
             headers: {
+                'Authorization': `token ${GITHUB_TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        const fileData = await currentFile.json();
+        
+        // Update the file
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/data.json`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${GITHUB_TOKEN}`,
+                'Accept': 'application/vnd.github.v3+json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(siteData)
+            body: JSON.stringify({
+                message: 'Update portfolio data',
+                content: btoa(JSON.stringify(siteData, null, 2)),
+                sha: fileData.sha,
+                branch: BRANCH
+            })
         });
 
         if (!response.ok) throw new Error('Failed to save data');
@@ -142,19 +166,33 @@ function deleteProject(index) {
 async function handleImageUpload(index, input) {
     const file = input.files[0];
     if (file) {
-        const formData = new FormData();
-        formData.append('image', file);
-
         try {
-            const response = await fetch('/admin/upload', {
-                method: 'POST',
-                body: formData
+            // Convert image to base64
+            const base64 = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
+
+            // Upload to GitHub
+            const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/assets/${file.name}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: 'Upload project image',
+                    content: base64,
+                    branch: BRANCH
+                })
             });
 
             if (!response.ok) throw new Error('Failed to upload image');
 
             const data = await response.json();
-            siteData.projects[index].image = data.url;
+            siteData.projects[index].image = `/assets/${file.name}`;
             renderProjects();
             showNotification('Image uploaded successfully!');
         } catch (error) {
