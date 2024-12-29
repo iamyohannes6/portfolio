@@ -1,8 +1,15 @@
 // GitHub configuration
-const GITHUB_TOKEN = ''; // You'll need to set this
 const REPO_OWNER = 'iamyohannes6';
 const REPO_NAME = 'portfolio';
 const BRANCH = 'main';
+
+// Get GitHub token from URL parameter for development
+const urlParams = new URLSearchParams(window.location.search);
+const GITHUB_TOKEN = urlParams.get('token');
+
+if (!GITHUB_TOKEN) {
+    showNotification('GitHub token not found. Please add it to the URL as ?token=YOUR_TOKEN', 'error');
+}
 
 // DOM Elements
 const heroForm = document.getElementById('hero-form');
