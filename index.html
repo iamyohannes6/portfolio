@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">iamyohannes</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#featured-works">Featured Works</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      </div>
+    </nav>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="floating-element float-1">
+          <img src="assets/float1.png" alt="Floating element 1">
+        </div>
+        <div class="floating-element float-2">
+          <img src="assets/float2.png" alt="Floating element 2">
+        </div>
+        <div class="floating-element float-3">
+          <img src="assets/float3.png" alt="Floating element 3">
+        </div>
+        <div class="hero-content">
+          <h1 class="parallax-title">Yohannes Goitom</h1>
+          <p class="subtitle">Graphic Designer . Creative Director . Branding Designer</p>
+          <div class="cta-buttons">
+            <a href="#featured-works" class="cta-primary">View Portfolio</a>
+            <a href="#contact" class="cta-secondary">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-background"></div>
+      </section>
+
+      <section id="about" class="about">
+        <div class="section-container">
+          <h2>About Me</h2>
+          <div class="about-content">
+            <div class="about-image">
+              <div class="image-wrapper">
+                <img src="assets/profile-placeholder.png" alt="Profile Image">
+              </div>
+            </div>
+            <div class="about-text-container">
+              <div class="about-text parallax-element">
+                <p>I'm a passionate graphic designer with a keen eye for detail and a love for creating impactful visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also effectively communicate your message.</p>
+                <p>With expertise in both digital and print design, I help brands tell their stories through compelling visuals.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured-works" class="featured-works">
+        <div class="section-header">
+            <h2>Featured Works</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="branding">Branding</button>
+                <button class="filter-btn" data-filter="print">Print</button>
+                <button class="filter-btn" data-filter="digital">Digital</button>
+            </div>
+        </div>
+        <div class="project-grid">
+            <!-- Projects will be dynamically loaded here -->
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="section-container">
+          <h2>Get in Touch</h2>
+          <div class="social-links-container">
+            <a href="https://et.linkedin.com/in/yohannes-goitom-1b29022ab" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-linkedin"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://www.pinterest.com/iamyohannes6/" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-pinterest"></i>
+              <span>Pinterest</span>
+            </a>
+            <a href="https://www.instagram.com/iamyohannes6/" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-instagram"></i>
+              <span>Instagram</span>
+            </a>
+            <a href="https://t.me/iamyohannes" target="_blank" rel="noopener noreferrer" class="social-link">
+              <i class="fab fa-telegram"></i>
+              <span>Telegram</span>
+            </a>
+            <a href="mailto:iamyohannes6@outlook.com" class="social-link">
+              <i class="far fa-envelope"></i>
+              <span>Email</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="section-container">
+        <p class="text-center">&copy; 2024 Portfolio. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Load site data from FaunaDB
+      async function loadSiteData() {
+        try {
+          const response = await fetch('/.netlify/functions/api');
+          if (!response.ok) {
+            throw new Error('Failed to fetch data');
+          }
+          const data = await response.json();
+          
+          // Update Hero Section
+          document.querySelector('.hero h1').textContent = data.hero.title || 'Yohannes Goitom';
+          document.querySelector('.hero .subtitle').textContent = data.hero.subtitle || 'Graphic Designer . Creative Director . Branding Designer';
+
+          // Update About Section
+          const aboutParagraphs = document.querySelectorAll('.about-text p');
+          if (data.about) {
+            aboutParagraphs[0].textContent = data.about.text || '';
+            aboutParagraphs[1].textContent = data.about.additional || '';
+          }
+
+          // Update Projects
+          if (data.projects && Array.isArray(data.projects)) {
+            const projectGrid = document.querySelector('.project-grid');
+            projectGrid.innerHTML = data.projects.map(project => `
+              <div class="project-card" data-category="${project.category || 'all'}">
+                <div class="project-image">
+                  <img src="${project.image || '/assets/project-placeholder.png'}" alt="${project.title}">
+                  <div class="project-overlay">
+                    <a href="${project.link}" class="view-project" target="_blank">View Project</a>
+                  </div>
+                </div>
+                <div class="project-info">
+                  <h3>${project.title}</h3>
+                  <p>${project.description}</p>
+                  <div class="project-tags">
+                    ${(project.tags || []).map(tag => `<span>${tag}</span>`).join('')}
+                  </div>
+                </div>
+              </div>
+            `).join('');
+          }
+
+          // Update Contact Section
+          if (data.contact) {
+            const contactLinks = {
+              linkedin: document.querySelector('a[href*="linkedin"]'),
+              pinterest: document.querySelector('a[href*="pinterest"]'),
+              instagram: document.querySelector('a[href*="instagram"]'),
+              telegram: document.querySelector('a[href*="telegram"]'),
+              email: document.querySelector('a[href*="mailto"]')
+            };
+
+            Object.entries(contactLinks).forEach(([platform, link]) => {
+              if (link && data.contact[platform]) {
+                if (platform === 'email') {
+                  link.href = `mailto:${data.contact[platform]}`;
+                } else {
+                  link.href = data.contact[platform];
+                }
+              }
+            });
+          }
+
+          // Initialize filtering after loading projects
+          initializeFiltering();
+        } catch (error) {
+          console.error('Error loading site data:', error);
+        }
+      }
+
+      // Initialize project filtering
+      function initializeFiltering() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            const category = button.getAttribute('data-filter');
+
+            projects.forEach(project => {
+              if (category === 'all' || project.getAttribute('data-category') === category) {
+                project.style.display = 'block';
+              } else {
+                project.style.display = 'none';
+              }
+            });
+          });
+        });
+      }
+
+      // Theme toggle functionality
+      function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update theme toggle button
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+      }
+
+      // Set initial theme
+      function setInitialTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+      }
+
+      // Initialize everything when the page loads
+      document.addEventListener('DOMContentLoaded', () => {
+        setInitialTheme();
+        loadSiteData();
+      });
+    </script>
+  </body>
+</html>

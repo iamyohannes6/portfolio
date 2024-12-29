@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin/style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>Portfolio Admin</h1>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </header>
+
+        <nav class="sidebar">
+            <div class="nav-item active" data-section="hero">
+                <i class="fas fa-home"></i>
+                <span>Hero Section</span>
+            </div>
+            <div class="nav-item" data-section="about">
+                <i class="fas fa-user"></i>
+                <span>About Me</span>
+            </div>
+            <div class="nav-item" data-section="projects">
+                <i class="fas fa-briefcase"></i>
+                <span>Projects</span>
+            </div>
+            <div class="nav-item" data-section="contact">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </div>
+        </nav>
+
+        <main class="content">
+            <!-- Hero Section Editor -->
+            <section id="hero-editor" class="editor-section active">
+                <h2>Hero Section</h2>
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="hero-title" value="Yohannes Goitom">
+                    </div>
+                    <div class="form-group">
+                        <label>Subtitle</label>
+                        <input type="text" id="hero-subtitle" value="Graphic Designer & Brand Identity Specialist">
+                    </div>
+                    <button class="save-btn">Save Changes</button>
+                </div>
+            </section>
+
+            <!-- About Section Editor -->
+            <section id="about-editor" class="editor-section">
+                <h2>About Me</h2>
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label>About Text</label>
+                        <textarea id="about-text" rows="6">I'm a passionate graphic designer with a keen eye for detail and a love for creating impactful visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also effectively communicate your message.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Additional Text</label>
+                        <textarea id="about-additional" rows="4">With expertise in both digital and print design, I help brands tell their stories through compelling visuals.</textarea>
+                    </div>
+                    <button class="save-btn">Save Changes</button>
+                </div>
+            </section>
+
+            <!-- Projects Section Editor -->
+            <section id="projects-editor" class="editor-section">
+                <h2>Projects</h2>
+                <button class="add-project-btn">
+                    <i class="fas fa-plus"></i> Add New Project
+                </button>
+                <div class="projects-list">
+                    <!-- Project cards will be generated here -->
+                </div>
+            </section>
+
+            <!-- Contact Section Editor -->
+            <section id="contact-editor" class="editor-section">
+                <h2>Contact Information</h2>
+                <div class="edit-form">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="contact-email" value="iamyohannes6@outlook.com">
+                    </div>
+                    <div class="form-group">
+                        <label>LinkedIn URL</label>
+                        <input type="url" id="contact-linkedin" value="https://et.linkedin.com/in/yohannes-goitom-1b29022ab">
+                    </div>
+                    <div class="form-group">
+                        <label>Pinterest URL</label>
+                        <input type="url" id="contact-pinterest" value="https://www.pinterest.com/iamyohannes6/">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram URL</label>
+                        <input type="url" id="contact-instagram" value="https://www.instagram.com/iamyohannes6/">
+                    </div>
+                    <div class="form-group">
+                        <label>Telegram URL</label>
+                        <input type="url" id="contact-telegram" value="https://t.me/iamyohannes">
+                    </div>
+                    <button class="save-btn">Save Changes</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/admin/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for portfolio",
+  "main": "api.js",
+  "dependencies": {
+    "faunadb": "^4.8.0"
+  }
+}

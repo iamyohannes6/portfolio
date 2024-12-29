@@ -1,0 +1,27 @@
+{
+    "hero": {
+        "title": "Yohannes Goitom",
+        "subtitle": "Graphic Designer & Brand Identity Specialist"
+    },
+    "about": {
+        "text": "I'm a passionate graphic designer with a keen eye for detail and a drive for creating impactful visual solutions. With years of experience in both digital and print design, I specialize in creating cohesive brand identities that tell compelling stories.",
+        "additional": "My approach combines creativity with strategic thinking, ensuring that each design not only looks beautiful but also effectively communicates your brand's message and values."
+    },
+    "projects": [
+        {
+            "title": "Brand Identity Design",
+            "description": "Complete brand identity design including logo, color palette, and brand guidelines.",
+            "image": "/assets/project1.jpg",
+            "category": "branding",
+            "link": "#",
+            "tags": ["Branding", "Logo Design", "Identity"]
+        }
+    ],
+    "contact": {
+        "email": "iamyohannes6@outlook.com",
+        "linkedin": "https://et.linkedin.com/in/yohannes-goitom-1b29022ab",
+        "pinterest": "https://www.pinterest.com/iamyohannes6/",
+        "instagram": "https://www.instagram.com/iamyohannes6/",
+        "telegram": "https://t.me/iamyohannes"
+    }
+}
