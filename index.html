@@ -1,115 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Modern Portfolio</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yohannes Goitom - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">iamyohannes</div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#featured-works">Featured Works</a>
-        <a href="#contact">Contact</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-      </div>
+</head>
+<body>
+    <nav>
+        <div class="logo">iamyohannes</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#works">Featured Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button class="theme-toggle" onclick="toggleTheme()">🌙</button></li>
+        </ul>
     </nav>
 
-    <main>
-      <section id="home" class="hero">
-        <div class="floating-element float-1">
-          <img src="assets/float1.png" alt="Floating element 1">
-        </div>
-        <div class="floating-element float-2">
-          <img src="assets/float2.png" alt="Floating element 2">
-        </div>
-        <div class="floating-element float-3">
-          <img src="assets/float3.png" alt="Floating element 3">
+    <section id="home" class="hero">
+        <div class="floating-elements">
+            <img src="assets/float1.png" alt="" class="floating-element-1">
+            <img src="assets/float2.png" alt="" class="floating-element-2">
+            <img src="assets/float3.png" alt="" class="floating-element-3">
         </div>
         <div class="hero-content">
-          <h1 class="parallax-title">Yohannes Goitom</h1>
-          <p class="subtitle">Graphic Designer . Creative Director . Branding Designer</p>
-          <div class="cta-buttons">
-            <a href="#featured-works" class="cta-primary">View Portfolio</a>
-            <a href="#contact" class="cta-secondary">Get in Touch</a>
-          </div>
+            <h1 id="hero-title"></h1>
+            <p id="hero-subtitle"></p>
+            <div class="cta-buttons">
+                <a href="#works" class="btn primary">View Portfolio</a>
+                <a href="#contact" class="btn secondary">Get in Touch</a>
+            </div>
         </div>
-        <div class="hero-background"></div>
-      </section>
+    </section>
 
-      <section id="about" class="about">
-        <div class="section-container">
-          <h2>About Me</h2>
-          <div class="about-content">
-            <div class="about-image">
-              <div class="image-wrapper">
-                <img src="assets/profile-placeholder.png" alt="Profile Image">
-              </div>
-            </div>
-            <div class="about-text-container">
-              <div class="about-text parallax-element">
-                <p>I'm a passionate graphic designer with a keen eye for detail and a love for creating impactful visual experiences. My work combines creativity with strategic thinking to deliver designs that not only look beautiful but also effectively communicate your message.</p>
-                <p>With expertise in both digital and print design, I help brands tell their stories through compelling visuals.</p>
-              </div>
-            </div>
-          </div>
+    <section id="about" class="about">
+        <div class="profile-image">
+            <img src="assets/profile-placeholder.png" alt="Profile Image" id="profile-image">
         </div>
-      </section>
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p id="about-text"></p>
+            <p id="about-additional"></p>
+        </div>
+    </section>
 
-      <section id="featured-works" class="featured-works">
-        <div class="section-header">
-            <h2>Featured Works</h2>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="branding">Branding</button>
-                <button class="filter-btn" data-filter="print">Print</button>
-                <button class="filter-btn" data-filter="digital">Digital</button>
-            </div>
+    <section id="works" class="featured-works">
+        <h2>Featured Works</h2>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="branding">Branding</button>
+            <button class="filter-btn" data-filter="print">Print</button>
+            <button class="filter-btn" data-filter="digital">Digital</button>
         </div>
-        <div class="project-grid">
+        <div class="projects-grid" id="projects-container">
             <!-- Projects will be dynamically loaded here -->
         </div>
-      </section>
+    </section>
 
-      <section id="contact" class="contact">
-        <div class="section-container">
-          <h2>Get in Touch</h2>
-          <div class="social-links-container">
-            <a href="https://et.linkedin.com/in/yohannes-goitom-1b29022ab" target="_blank" rel="noopener noreferrer" class="social-link">
-              <i class="fab fa-linkedin"></i>
-              <span>LinkedIn</span>
-            </a>
-            <a href="https://www.pinterest.com/iamyohannes6/" target="_blank" rel="noopener noreferrer" class="social-link">
-              <i class="fab fa-pinterest"></i>
-              <span>Pinterest</span>
-            </a>
-            <a href="https://www.instagram.com/iamyohannes6/" target="_blank" rel="noopener noreferrer" class="social-link">
-              <i class="fab fa-instagram"></i>
-              <span>Instagram</span>
-            </a>
-            <a href="https://t.me/iamyohannes" target="_blank" rel="noopener noreferrer" class="social-link">
-              <i class="fab fa-telegram"></i>
-              <span>Telegram</span>
-            </a>
-            <a href="mailto:iamyohannes6@outlook.com" class="social-link">
-              <i class="far fa-envelope"></i>
-              <span>Email</span>
-            </a>
-          </div>
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <div class="social-links">
+            <a href="https://et.linkedin.com/in/yohannes-goitom-1b29022ab" id="linkedin" target="_blank" class="social-link">LinkedIn</a>
+            <a href="https://www.pinterest.com/iamyohannes6/" id="pinterest" target="_blank" class="social-link">Pinterest</a>
+            <a href="https://www.instagram.com/iamyohannes6/" id="instagram" target="_blank" class="social-link">Instagram</a>
+            <a href="https://t.me/iamyohannes" id="telegram" target="_blank" class="social-link">Telegram</a>
+            <a href="mailto:iamyohannes6@outlook.com" id="email" class="social-link">Email</a>
         </div>
-      </section>
-    </main>
+    </section>
 
     <footer>
-      <div class="section-container">
-        <p class="text-center">&copy; 2024 Portfolio. All rights reserved.</p>
-      </div>
+        <p>&copy; 2024 Portfolio. All rights reserved.</p>
     </footer>
 
     <script>
@@ -123,19 +87,16 @@
           const data = await response.json();
           
           // Update Hero Section
-          document.querySelector('.hero h1').textContent = data.hero.title || 'Yohannes Goitom';
-          document.querySelector('.hero .subtitle').textContent = data.hero.subtitle || 'Graphic Designer . Creative Director . Branding Designer';
+          document.querySelector('#hero-title').textContent = data.hero.title || 'Yohannes Goitom';
+          document.querySelector('#hero-subtitle').textContent = data.hero.subtitle || 'Graphic Designer . Creative Director . Branding Designer';
 
           // Update About Section
-          const aboutParagraphs = document.querySelectorAll('.about-text p');
-          if (data.about) {
-            aboutParagraphs[0].textContent = data.about.text || '';
-            aboutParagraphs[1].textContent = data.about.additional || '';
-          }
+          document.querySelector('#about-text').textContent = data.about.text || '';
+          document.querySelector('#about-additional').textContent = data.about.additional || '';
 
           // Update Projects
           if (data.projects && Array.isArray(data.projects)) {
-            const projectGrid = document.querySelector('.project-grid');
+            const projectGrid = document.querySelector('#projects-container');
             projectGrid.innerHTML = data.projects.map(project => `
               <div class="project-card" data-category="${project.category || 'all'}">
                 <div class="project-image">
@@ -158,11 +119,11 @@
           // Update Contact Section
           if (data.contact) {
             const contactLinks = {
-              linkedin: document.querySelector('a[href*="linkedin"]'),
-              pinterest: document.querySelector('a[href*="pinterest"]'),
-              instagram: document.querySelector('a[href*="instagram"]'),
-              telegram: document.querySelector('a[href*="telegram"]'),
-              email: document.querySelector('a[href*="mailto"]')
+              linkedin: document.querySelector('#linkedin'),
+              pinterest: document.querySelector('#pinterest'),
+              instagram: document.querySelector('#instagram'),
+              telegram: document.querySelector('#telegram'),
+              email: document.querySelector('#email')
             };
 
             Object.entries(contactLinks).forEach(([platform, link]) => {
@@ -235,5 +196,5 @@
         loadSiteData();
       });
     </script>
-  </body>
+</body>
 </html>
